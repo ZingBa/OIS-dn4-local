@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient data input</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href = "css/bootstrap.min.css" rel = "stylesheet">
+    <link href = "css/styles.css" rel = "stylesheet">
+    <script src="inputData.js"></script>
+
+</head>
+<body style="margin-bottom: 80px">
+
+<div class = "navbar navbar-inverse navbar-static-top">
+    <div class = "container">
+
+        <a href = "#" class = "navbar-brand">EhrScapeApp</a>
+
+        <button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+        </button>
+
+        <div class = "collapse navbar-collapse navHeaderCollapse">
+
+            <ul class = "nav navbar-nav navbar-right">
+
+                <li><a href = "index.html">Home</a></li>
+                <li><a href = "inputPatients.html">Patients</a></li>
+                <li class="active"><a href = "#">Patient Data</a></li>
+                <li><a href = "appData.html">Data Display</a></li>
+                <li class = "dropdown">
+
+                    <a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">Social Media <b class = "caret"></b></a>
+                    <ul class = "dropdown-menu">
+                        <li><a href="http://www.facebook.com/sharer.php?u=<http://google.com">Facebook</a></li>
+                        <li><a href="http://twitter.com/share" data-text="I love this app.">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></li>
+                        <li><a href="https://plus.google.com/share?url={URL}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">Google+</a></li>
+                    </ul>
+
+                </li>
+                <li><a href ="about.html">About</a></li>
+
+            </ul>
+
+        </div>
+
+    </div>
+</div>
+
+<div class = "container">
+
+    <div class = "jumbotron">
+        <center><img class= img-responsive src="images/dataEntryBanner.jpg"></center>
+    </div>
+
+</div>
+
+<div class = "container">
+
+    <div class = "row">
+
+
+        <div class = "col-xs-2"></div>
+        <div class = "col-xs-8">
+
+            <div class="panel panel-default">
+                <div class="panel-heading" style="background-color: #204d74; ">
+                    <h3 class="panel-title"><font color="white">Get EHR ID of existing patient</font></h3>
+                </div>
+                <div class="panel-body">
+
+                    <div><b>Select patient:</b></div>
+                    <select class="form-control input-sm" id="readSelectedPatient">
+                        <option value=""></option>
+                        <option value="8660098f-f5fc-4501-870e-249ace450794">Stric Matic</option>
+                        <option value="f9f3913e-60aa-4474-a4aa-110e7b36d938">Teta Peta</option>
+                        <option value="edb61f13-d9e7-4ccf-ab6c-4733ab31e40f">Sin Pobalin</option>
+                    </select>
+
+                    <div><b>Patient's EHR ID:</b></div>
+                    <input id="nameToEHR" type="text" class="form-control" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx">
+
+                    <hr>
+
+                    <button type="button" class="btn btn-success btn-ml" onclick="readPatientEHRId()">Get patient's EHR ID</button>
+
+                    <div id="ehrIDReceived" style="display: none;">
+                        <hr>
+                        <div id="ehrMessage"></div>
+                        <hr>
+                        <div class="row">
+                            <center>
+                                <div class="col-xs-4">
+                                    <span class="label label-default">Name</span>
+                                    <input class="form-control" id="nameRec" type="text">
+                                </div>
+                            </center>
+
+                            <center>
+                                <div class="col-xs-4">
+                                    <span class="label label-default">Surname</span>
+                                    <input class="form-control" id="surnameRec" type="text">
+                                </div>
+                            </center>
+
+                            <center>
+                                <div class="col-xs-4">
+                                    <span class="label label-default">Date of birth</span>
+                                    <input class="form-control" id="birthDateRec" type="text">
+                                </div>
+                            </center>
+                        </div>
+                    </div>
+
+                    <div id="recordHideButton" style="display: none">
+                        <hr>
+                        <div class="col-xs-12">
+                            <button type="button" class="btn btn-success btn-ml; col-xs-12"  onclick="revealDataForm()">Enter new patient data</button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+        <div class = "col-xs-2"></div>
+
+    </div>
+
+    <div class = "row" id="dataForm" style="display: none;">
+
+
+        <div class = "col-xs-2"></div>
+        <div class = "col-xs-8">
+
+            <div class="panel panel-default">
+                <div class="panel-heading" style="background-color: #204d74; ">
+                    <h3 class="panel-title"><font color="white">New patient data record entry</font></h3>
+                </div>
+                <div class="panel-body">
+                    <div><b>Patient's EHR ID:</b></div>
+                    <input id="ehrDataIn" type="text" class="form-control" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx">
+
+
+                    <hr>
+                    <h5><b>Date and doctor</b></h5>
+
+                    <div class="row">
+                        <center>
+                            <div class="col-xs-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Date</span>
+                                    <input class="form-control" id="dateIn" type="text" placeholder="yyyy-mm-ddThh:mm">
+                                </div>
+                            </div>
+                        </center>
+
+                        <center>
+                            <div class="col-xs-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Dr. </span>
+                                    <input class="form-control" id="doctorIn" type="text" placeholder="Malina">
+
+                                </div>
+                            </div>
+                        </center>
+                    </div>
+
+                    <hr>
+                    <h5><b>Patient problems: </b></h5>
+                    <div class="row">
+                        <center>
+                            <div class="col-xs-12">
+                                <input class="form-control" id="problemsIn" type="text">
+                            </div>
+                        </center>
+
+                    </div>
+                    <hr>
+
+                    <h5><b>Body</b></h5>
+
+                    <div class="row">
+                        <center>
+                            <div class="col-xs-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Weight</span>
+                                    <input class="form-control" id="weightIn" type="text">
+                                    <span class="input-group-addon">kg</span>
+                                </div>
+                            </div>
+                        </center>
+
+                        <center>
+                            <div class="col-xs-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Height</span>
+                                    <input class="form-control" id="heightIn" type="text">
+                                    <span class="input-group-addon">cm</span>
+                                </div>
+                            </div>
+                        </center>
+
+                        <center>
+                            <div class="col-xs-4">
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" onclick="calculateBMI()">BMI</button>
+                                    </span>
+                                    <input class="form-control" id="BMIin" type="text">
+                                    <span class="input-group-addon">kg/m2</span>
+                                </div>
+                            </div>
+                        </center>
+                    </div>
+                    <hr>
+
+                    <h5><b>Blood pressure and Pulse</b></h5>
+
+                    <div class="row">
+                        <center>
+                            <div class="col-xs-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Systolic</span>
+                                    <input class="form-control" id="systolicIn" type="text">
+                                    <span class="input-group-addon">mm[Hg]</span>
+                                </div>
+                            </div>
+                        </center>
+
+                        <center>
+                            <div class="col-xs-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Diastolic</span>
+                                    <input class="form-control" id="diastolicIn" type="text">
+                                    <span class="input-group-addon">mm[Hg]</span>
+                                </div>
+                            </div>
+                        </center>
+
+                        <center>
+                            <div class="col-xs-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Rate</span>
+                                    <input class="form-control" id="pulseIn" type="text">
+                                    <span class="input-group-addon">/min</span>
+                                </div>
+                            </div>
+                        </center>
+
+                    </div>
+
+                    <hr>
+                    <h5><b>Advanced vitals</b></h5>
+
+                    <div class="row">
+                        <center>
+                            <div class="col-xs-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Temperature</span>
+                                    <input class="form-control" id="tempIn" type="text">
+                                    <span class="input-group-addon">°C</span>
+                                </div>
+                            </div>
+                        </center>
+
+                        <center>
+                            <div class="col-xs-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">spO2</span>
+                                    <input class="form-control" id="oxygenIn" type="text">
+                                    <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                        </center>
+                    </div>
+
+                    <hr>
+
+                    <div id="recordEntryMessage" style="display: none;"></div>
+
+                    <div class="col-xs-12">
+                        <button type="button" class="btn btn-success btn-ml; col-xs-12"  onclick="newDataEntry()">Create data Entry</button>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class = "col-xs-2"></div>
+
+    </div>
+
+</div>
+
+<div class = "navbar navbar-default navbar-fixed-bottom">
+
+    <div class = "container">
+        <p class = "navbar-text pull-left">Site Built By Robert Tovornik</p>
+        <a href = "https://www.ehrscape.com/" class = "navbar-btn btn-danger btn pull-right">EHRScape platform</a>
+    </div>
+
+</div>
+
+<script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src = "js/bootstrap.js"></script>
+
+</body>
+</html>

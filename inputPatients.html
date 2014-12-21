@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient data input</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href = "css/bootstrap.min.css" rel = "stylesheet">
+    <link href = "css/styles.css" rel = "stylesheet">
+    <script src="inputPatients.js"></script>
+
+</head>
+<body style="margin-bottom: 80px">
+
+<div class = "navbar navbar-inverse navbar-static-top">
+    <div class = "container">
+
+        <a href = "#" class = "navbar-brand">EhrScapeApp</a>
+
+        <button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+            <span class = "icon-bar"></span>
+        </button>
+
+        <div class = "collapse navbar-collapse navHeaderCollapse">
+
+            <ul class = "nav navbar-nav navbar-right">
+
+                <li><a href = "index.html">Home</a></li>
+                <li class="active"><a href = "#">Patients</a></li>
+                <li><a href = "inputData.html">Patient Data</a></li>
+                <li><a href = "appData.html">Data Display</a></li>
+                <li class = "dropdown">
+
+                    <a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">Social Media <b class = "caret"></b></a>
+                    <ul class = "dropdown-menu">
+                        <li><a href="http://www.facebook.com/sharer.php?u=<http://google.com">Facebook</a></li>
+                        <li><a href="http://twitter.com/share" data-text="I love this app.">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></li>
+                        <li><a href="https://plus.google.com/share?url={URL}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">Google+</a></li>
+                    </ul>
+
+                </li>
+                <li><a href ="about.html">About</a></li>
+
+            </ul>
+
+        </div>
+
+    </div>
+</div>
+
+<div class = "container">
+
+    <div class = "jumbotron" style="background-color: #204d74; border-radius: 50%; ">
+        <center><img class= img-responsive style="border-radius: 50%;" src="images/patients.jpg"></center>
+    </div>
+
+</div>
+
+<div class = "container">
+
+    <div class = "row">
+
+        <div class = "col-xs-2"></div>
+            <div class = "col-xs-8">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background-color: #204d74; ">
+                        <h3 class="panel-title"><font color="white">Create EHR for new patient</font></h3>
+                    </div>
+                    <div class="panel-body">
+                        <center><h6> CREATE A NEW PATIENT</h6></center>
+                        <div><b>Name:</b></div>
+                        <input id="createName" type="text" class="form-control input-mini" placeholder="name">
+                        <div><b>Surname:</b></div>
+                        <input id="createSurname" type="text" class="form-control" placeholder="surname">
+                        <div><b>Date of birth:</b></div>
+                        <input id="createDateOfBirth" type="text" class="form-control" placeholder="yyyy-mm-ddThh:mm">
+                        <hr>
+                       <center><h5>OR</h5></center>
+                       <hr>
+                            <center><h6> SELECT PATIENT FROM THE LIST</h6></center>
+                            <div><b>Select patient from list</b></div>
+                            <select class="form-control input-sm" id="readSelectedPatient">
+                                <option value=""></option>
+                                <option value="Stric,Matic,1978-09-10T12:20">Stric Matic</option>
+                                <option value="Teta,Peta,1982-03-15T05:56">Teta Peta</option>
+                                <option value="Sin,Pobalin,2001-11-22T19:25">Sin Pobalin</option>
+                            </select>
+                        <hr>
+                        <div id="patientCreatedEHR" style="display: none;"></div>
+                        <button type="button" class="btn btn-success btn-ml col-xs-6" onclick="createPatientEHR()">Validate patient</button>
+                        <div class= "col-xs-6" id="idDisplay" style="display: none;">
+                            <span class="label label-default">Copy EHR ID:</span>
+                            <input id="idWindowsDisplay" type="text" class="form-control input-mini">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        <div class = "col-xs-2"></div>
+
+    </div>
+
+</div>
+
+
+<div class = "navbar navbar-default navbar-fixed-bottom">
+
+    <div class = "container">
+        <p class = "navbar-text pull-left">Site Built By Robert Tovornik</p>
+        <a href = "https://www.ehrscape.com/" class = "navbar-btn btn-danger btn pull-right">EHRScape platform</a>
+    </div>
+
+</div>
+
+<script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src = "js/bootstrap.js"></script>
+
+</body>
+</html>
